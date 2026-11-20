@@ -3,6 +3,7 @@
 void	error_callback(int error, const char *description);
 void	key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void	window_close_callback(GLFWwindow *window);
+void	window_frame_buffer_size_callback(GLFWwindow *window, int w, int h);
 
 t_ftsglWindow	*ftsglWindowCreate(int width, int height, char *title)
 {
@@ -37,6 +38,7 @@ t_ftsglWindow	*ftsglWindowCreate(int width, int height, char *title)
 	printf("OpenGl version: %d.%d\n", maj, min);
 
 	glfwSetKeyCallback(window->win, key_callback);
+	glfwSetFramebufferSizeCallback(window->win, window_frame_buffer_size_callback);
 	glfwSetWindowCloseCallback(window->win, window_close_callback);
 	glfwMakeContextCurrent(window->win);
 	glfwSwapInterval(0);
