@@ -12,18 +12,15 @@ int	main(void)
 		return (FTSGL_FAILURE);
 
 	t_ftsglRenderer	*renderer = ftsglRendererCreate(window);
-	GLint	us = glGetUniformLocation(renderer->program->addr, "resolution");
-	glUniform2f(us, window->width, window->height);
+	glfwSetWindowUserPointer(window->win, renderer);
+
 	int	x = 0;
 	while(!glfwWindowShouldClose(window->win))
 	{
-        glfwGetWindowSize(window->win, &width, &height);
-		glUniform2f(us, width, height);
-
 		glfwPollEvents();
-		ftsglRendererSetPixelColor(renderer, x % window->width, x / window->width, (t_ftsglVec3){1, 0, 0});
+		ftsglRendererSetPixelColor(renderer, x % window->base_width, x / window->base_width, (t_ftsglVec3){1, 0, 0});
 		++x;
-		if (x >= window->width * window->height)
+		if (x >= window->base_width * window->base_height)
 			x = 0;
 		ftsglRendererPresent(renderer);
 	}
