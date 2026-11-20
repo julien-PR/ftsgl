@@ -11,6 +11,8 @@
 
 typedef struct s_ftsglWindow
 {
+	int			base_width;
+	int			base_height;
 	int			width;
 	int			height;
 	t_ftsglVao	vao;

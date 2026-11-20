@@ -20,6 +20,8 @@ t_ftsglWindow	*ftsglWindowCreate(int width, int height, char *title)
 		glfwTerminate();
 		return (NULL);
 	}
+	window->base_width = width;
+	window->base_height = height;
 	window->width = width;
 	window->height = height;
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
