@@ -2,12 +2,9 @@
 #include "libftsgl.h"
 #include "ftsglVao.h"
 
-int	width = 540;
-int	height = 540;
-
 int	main(void)
 {
-	t_ftsglWindow	*window = ftsglWindowCreate(width, height, "ftsgl");
+	t_ftsglWindow	*window = ftsglWindowCreate(540, 540, "ftsgl");
 	if (NULL == window)
 		return (FTSGL_FAILURE);
 
