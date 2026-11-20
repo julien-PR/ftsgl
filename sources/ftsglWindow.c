@@ -1,4 +1,5 @@
 #include "ftsglWindow.h"
+#include "ftsglRenderer.h"
 
 static void	error_callback(int error, const char *description)
 {
@@ -25,11 +26,15 @@ static void	window_close_callback(GLFWwindow *window)
 
 static void	window_frame_buffer_size_callback(GLFWwindow *window, int w, int h)
 {
+	t_ftsglRenderer	*renderer;
+
 	(void)window;
 	if (w == 0 || h == 0)
 		return ;
+	renderer = glfwGetWindowUserPointer(window);
+	renderer->window->width = w;
+	renderer->window->height = h;
 	glViewport(0, 0, w, h);
-	printf("Window resized\n");
 	return ;
 }
 
