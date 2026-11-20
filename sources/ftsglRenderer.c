@@ -12,20 +12,20 @@ t_ftsglRenderer	*ftsglRendererCreate(t_ftsglWindow *window)
 	if (NULL == renderer)
 		return (NULL);
 	renderer->window = window;
-	vertices_size = window->width * window->height * sizeof(t_ftsglQuad);
-	elements_size = window->width * window->height * 6 * sizeof(GLuint);
+	vertices_size = window->base_width * window->base_height * sizeof(t_ftsglQuad);
+	elements_size = window->base_width * window->base_height * 6 * sizeof(GLuint);
 	renderer->vertexBuffer = ftsglBufferObjectGen(GL_ARRAY_BUFFER, vertices_size);
 	renderer->elementBuffer = ftsglBufferObjectGen(GL_ELEMENT_ARRAY_BUFFER, elements_size);
 
-	const GLfloat	qw = 2.0f / (GLfloat)window->width;
-	const GLfloat	qh = 2.0f / (GLfloat)window->height;
-	for (GLint y = 0; y < window->height; ++y)
+	const GLfloat	qw = 2.0f / (GLfloat)window->base_width;
+	const GLfloat	qh = 2.0f / (GLfloat)window->base_height;
+	for (GLint y = 0; y < window->base_height; ++y)
 	{
-		for (GLint x = 0; x < window->width; ++x)
+		for (GLint x = 0; x < window->base_width; ++x)
 		{
-			const GLuint		index = y * window->width + x;
-			const GLfloat		qx = x / (GLfloat)window->width * 2.0f - 1;
-			const GLfloat		qy = y / (GLfloat)window->height * 2.0f - 1;
+			const GLuint		index = y * window->base_width + x;
+			const GLfloat		qx = x / (GLfloat)window->base_width * 2.0f - 1;
+			const GLfloat		qy = y / (GLfloat)window->base_height * 2.0f - 1;
 			const t_ftsglQuad	data = ftsglQuad(
 				ftsglVec2(qx, qy),
 				ftsglVec2(qx + qw, qy + qh),
@@ -59,7 +59,7 @@ t_ftsglRenderer	*ftsglRendererPresent(t_ftsglRenderer *renderer)
 	if (NULL == renderer)
 		return (NULL);
 	ftsglProgramUse(renderer->program);
-	glDrawElements(GL_TRIANGLES, (renderer->window->width * renderer->window->height) * 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, (renderer->window->base_width * renderer->window->base_height) * 6, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(renderer->window->win);
 	return (renderer);
 }
@@ -68,20 +68,20 @@ t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, 
 {
 	if (NULL == renderer)
 		return (NULL);
-	if (x < 0 || y < 0 || x >= renderer->window->width || y >= renderer->window->height)
+	if (x < 0 || y < 0 || x >= renderer->window->base_width || y >= renderer->window->base_height)
 		return (renderer);
 	
-	const GLint			ry = renderer->window->height - y - 1;
-	const GLfloat		qw = 2.0f / (GLfloat)renderer->window->width;
-	const GLfloat		qh = 2.0f / (GLfloat)renderer->window->height;
-	const GLfloat		qx = x / (GLfloat)renderer->window->width * 2.0f - 1;
-	const GLfloat		qy = ry / (GLfloat)renderer->window->height * 2.0f - 1;
+	const GLint			ry = renderer->window->base_height - y - 1;
+	const GLfloat		qw = 2.0f / (GLfloat)renderer->window->base_width;
+	const GLfloat		qh = 2.0f / (GLfloat)renderer->window->base_height;
+	const GLfloat		qx = x / (GLfloat)renderer->window->base_width * 2.0f - 1;
+	const GLfloat		qy = ry / (GLfloat)renderer->window->base_height * 2.0f - 1;
 	const t_ftsglQuad	quad = ftsglQuad(
 		ftsglVec2(qx, qy),
 		ftsglVec2(qx + qw, qy + qh),
 		ftsglVec4(col.x, col.y, col.z, 1.0f)
 	);
-	ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (ry * renderer->window->width + x) * sizeof(quad), sizeof(quad), &quad);
+	ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (ry * renderer->window->base_width + x) * sizeof(quad), sizeof(quad), &quad);
 	return (renderer);
 }
 
@@ -89,20 +89,20 @@ t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3 col)
 {
 	if (NULL == renderer)
 		return (NULL);
-	const GLfloat	qw = 2.0f / (GLfloat)renderer->window->width;
-	const GLfloat	qh = 2.0f / (GLfloat)renderer->window->height;
-	for (GLint y = 0; y < renderer->window->height; ++y)
+	const GLfloat	qw = 2.0f / (GLfloat)renderer->window->base_width;
+	const GLfloat	qh = 2.0f / (GLfloat)renderer->window->base_height;
+	for (GLint y = 0; y < renderer->window->base_height; ++y)
 	{
-		for (GLint x = 0; x < renderer->window->width; ++x)
+		for (GLint x = 0; x < renderer->window->base_width; ++x)
 		{
-			const GLfloat		qx = x / (GLfloat)renderer->window->width * 2.0f - 1;
-			const GLfloat		qy = y / (GLfloat)renderer->window->height * 2.0f - 1;
+			const GLfloat		qx = x / (GLfloat)renderer->window->base_width * 2.0f - 1;
+			const GLfloat		qy = y / (GLfloat)renderer->window->base_height * 2.0f - 1;
 			const t_ftsglQuad	quad = ftsglQuad(
 				ftsglVec2(qx, qy),
 				ftsglVec2(qx + qw, qy + qh),
 				ftsglVec4(col.x, col.y, col.z, 1.0f)
 			);
-			ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (y * renderer->window->width + x) * sizeof(quad), sizeof(quad), &quad);
+			ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (y * renderer->window->base_width + x) * sizeof(quad), sizeof(quad), &quad);
 		}
 	}
 	return (renderer);
