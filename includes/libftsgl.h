@@ -1,10 +1,6 @@
 #ifndef LIBFTSGL_H
 # define LIBFTSGL_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
 # include "ftsglWindow.h"
 # include "ftsglRenderer.h"
 
