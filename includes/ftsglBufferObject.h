@@ -6,7 +6,7 @@
 # define GLEW_STATIC
 # include <GL/glew.h>
 # include "ftsglQuad.h"
-# include "libstr.h"
+# include "libmem.h"
 
 typedef struct s_ftsglBufferObject
 {

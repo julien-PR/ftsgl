@@ -28,7 +28,7 @@ t_ftsglShaderProgram	*ftsglProgramCreate(GLsizei n, t_ftsglShader **shaders, GLu
 			free(program);
 			return (NULL);
 		}
-		strMemCopy(program->shaders, shaders, n * sizeof(t_ftsglShader *));
+		memCopy(program->shaders, shaders, n * sizeof(t_ftsglShader *));
 		for (GLsizei index = 0; index < n; ++index)
 			glAttachShader(program->addr, (*(program->shaders + index))->addr);
 	}

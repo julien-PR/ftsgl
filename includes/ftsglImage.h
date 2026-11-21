@@ -4,7 +4,7 @@
 # include <stdlib.h>
 # define GLEW_STATIC
 # include <GL/glew.h>
-# include "libstr.h"
+# include "libmem.h"
 
 typedef struct s_ftsglImage
 {

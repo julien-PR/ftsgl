@@ -1,6 +1,6 @@
 #define LIBSTR_IMPLEMENTATION
+#define LIBMEM_IMPLEMENTATION
 #include "libftsgl.h"
-#include "ftsglVao.h"
 
 int	main(void)
 {

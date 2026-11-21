@@ -16,7 +16,7 @@ t_ftsglImage	*ftsglImageCreate(int width, int height, void *pixels)
 		free(image);
 		return (NULL);
 	}
-	strMemCopy(image->pixels, pixels, size * 4);
+	memCopy(image->pixels, pixels, size * 4);
 	return (image);
 }
 

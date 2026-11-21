@@ -22,7 +22,7 @@ t_ftsglBufferObject	*ftsglBufferObjectDataAdd(t_ftsglBufferObject *buffer, GLsiz
 		return (NULL);
 	if (buffer->size + size > buffer->capacity)
 		return (NULL);
-	strMemCopy(buffer->data + buffer->size, data, size);
+	memCopy(buffer->data + buffer->size, data, size);
 	buffer->size += size;
 	return (buffer);
 }
@@ -33,7 +33,7 @@ t_ftsglBufferObject	*ftsglBufferObjectDataUpdate(t_ftsglBufferObject *buffer, GL
 		return (NULL);
 	if (offset + size > buffer->capacity)
 		return (buffer);
-	strMemCopy(buffer->data + offset, data, size);
+	memCopy(buffer->data + offset, data, size);
 	glBufferSubData(buffer->type, offset, size, data);
 	return (buffer);
 }

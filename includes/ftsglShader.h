@@ -5,6 +5,8 @@
 # include <stdlib.h>
 # define GLEW_STATIC
 # include <GL/glew.h>
+# include "libstr.h"
+# include "libmem.h"
 # include "utils.h"
 
 typedef struct s_ftsglShader
