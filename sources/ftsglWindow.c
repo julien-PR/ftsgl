@@ -86,9 +86,6 @@ t_ftsglWindow	*ftsglWindowCreate(int width, int height, char *title)
 		ftsglWindowDestroy(window);
 		return (NULL);
 	}
-
-	window->vao = ftsglVaoGen();
-	ftsglVaoBind(&window->vao);
 	return (window);
 }
 
@@ -96,7 +93,6 @@ void	ftsglWindowDestroy(t_ftsglWindow *window)
 {
 	if (NULL == window)
 		return ;
-	ftsglVaoDestroy(&window->vao);
 	glfwDestroyWindow(window->win);
 	glfwTerminate();
 	free(window);
