@@ -11,6 +11,8 @@ t_ftsglRenderer	*ftsglRendererCreate(t_ftsglWindow *window)
 	renderer = malloc(sizeof(t_ftsglRenderer));
 	if (NULL == renderer)
 		return (NULL);
+	renderer->vao = ftsglVaoGen();
+	ftsglVaoBind(&renderer->vao);
 	renderer->window = window;
 	vertices_size = window->base_width * window->base_height * sizeof(t_ftsglQuad);
 	elements_size = window->base_width * window->base_height * 6 * sizeof(GLuint);
@@ -115,6 +117,7 @@ void	ftsglRendererDestroy(t_ftsglRenderer *renderer)
 	ftsglProgramDestroy(renderer->program);
 	ftsglBufferObjectDestroy(&renderer->elementBuffer);
 	ftsglBufferObjectDestroy(&renderer->vertexBuffer);
+	ftsglVaoDestroy(&renderer->vao);
 	free(renderer);
 	return ;
 }
