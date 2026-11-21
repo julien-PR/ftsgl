@@ -68,7 +68,7 @@ t_ftsglRenderer	*ftsglRendererPresent(t_ftsglRenderer *renderer)
 	return (renderer);
 }
 
-t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, GLint y, t_ftsglVec3f col)
+t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, GLint y, t_ftsglVec4f col)
 {
 	if (NULL == renderer)
 		return (NULL);
@@ -80,10 +80,11 @@ t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, 
 	const GLfloat		qh = 2.0f / (GLfloat)renderer->window->base_height;
 	const GLfloat		qx = x / (GLfloat)renderer->window->base_width * 2.0f - 1;
 	const GLfloat		qy = ry / (GLfloat)renderer->window->base_height * 2.0f - 1;
+	const t_ftsglVec4f	old = (((t_ftsglQuad *)renderer->vertexBuffer.data) + (ry * renderer->window->base_width + x))->a.col;
 	const t_ftsglQuad	quad = ftsglQuad(
 		ftsglVec2f(qx, qy),
 		ftsglVec2f(qx + qw, qy + qh),
-		ftsglVec4f(col.x, col.y, col.z, 1.0f)
+		ftsglColorMix4f(col, old)
 	);
 	ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (ry * renderer->window->base_width + x) * sizeof(quad), sizeof(quad), &quad);
 	return (renderer);
@@ -122,7 +123,7 @@ t_ftsglRenderer	*ftsglRendererPutImage(t_ftsglRenderer *renderer, t_ftsglImage *
 		for (GLint px = 0; px < image->width; ++px)
 		{
 			const unsigned char	*pixel = (unsigned char *)(image->pixels + (py * image->width + px) * 3);
-			ftsglRendererSetPixelColor(renderer, x + px, y + py, ftsglVec3f(*pixel, *(pixel+1), *(pixel+2)));
+			ftsglRendererSetPixelColor(renderer, x + px, y + py, ftsglVec4f(*pixel, *(pixel+1), *(pixel+2), 1.0f));
 		}
 	}
 	return (renderer);
