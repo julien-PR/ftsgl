@@ -122,8 +122,8 @@ t_ftsglRenderer	*ftsglRendererPutImage(t_ftsglRenderer *renderer, t_ftsglImage *
 	{
 		for (GLint px = 0; px < image->width; ++px)
 		{
-			const unsigned char	*pixel = (unsigned char *)(image->pixels + (py * image->width + px) * 3);
-			ftsglRendererSetPixelColor(renderer, x + px, y + py, ftsglVec4f(*pixel, *(pixel+1), *(pixel+2), 1.0f));
+			const unsigned char	*pixel = (unsigned char *)(image->pixels + (py * image->width + px) * 4);
+			ftsglRendererSetPixelColor(renderer, x + px, y + py, ftsglVec4f(*pixel / 255.0f, *(pixel+1) / 255.0f, *(pixel+2) / 255.0f, *(pixel+3) / 255.0f));
 		}
 	}
 	return (renderer);
