@@ -60,9 +60,11 @@ t_ftsglRenderer	*ftsglRendererPresent(t_ftsglRenderer *renderer)
 {
 	if (NULL == renderer)
 		return (NULL);
+	ftsglVaoBind(&renderer->vao);
 	ftsglProgramUse(renderer->program);
 	glDrawElements(GL_TRIANGLES, (renderer->window->base_width * renderer->window->base_height) * 6, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(renderer->window->win);
+	glBindVertexArray(0);
 	return (renderer);
 }
 
