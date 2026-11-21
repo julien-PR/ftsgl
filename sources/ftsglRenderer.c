@@ -89,7 +89,7 @@ t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, 
 	return (renderer);
 }
 
-t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3f col)
+t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec4f col)
 {
 	if (NULL == renderer)
 		return (NULL);
@@ -101,10 +101,11 @@ t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3f col)
 		{
 			const GLfloat		qx = x / (GLfloat)renderer->window->base_width * 2.0f - 1;
 			const GLfloat		qy = y / (GLfloat)renderer->window->base_height * 2.0f - 1;
+			const t_ftsglVec4f	old = (((t_ftsglQuad *)renderer->vertexBuffer.data) + (y * renderer->window->base_width + x))->a.col;
 			const t_ftsglQuad	quad = ftsglQuad(
 				ftsglVec2f(qx, qy),
 				ftsglVec2f(qx + qw, qy + qh),
-				ftsglVec4f(col.x, col.y, col.z, 1.0f)
+				ftsglColorMix4f(col, old)
 			);
 			ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (y * renderer->window->base_width + x) * sizeof(quad), sizeof(quad), &quad);
 		}

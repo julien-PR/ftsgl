@@ -6,6 +6,7 @@
 # include "ftsglImage.h"
 # include "ftsglBufferObject.h"
 # include "ftsglShader.h"
+# include "ftsglColor.h"
 
 typedef struct s_ftsglRenderer
 {
@@ -22,7 +23,7 @@ t_ftsglRenderer	*ftsglRendererPresent(t_ftsglRenderer *renderer);
 
 t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, GLint y, t_ftsglVec3f col);
 
-t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3f col);
+t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec4f col);
 
 t_ftsglRenderer	*ftsglRendererPutImage(t_ftsglRenderer *renderer, t_ftsglImage *image, int x, int y);
 
