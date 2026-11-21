@@ -8,6 +8,7 @@
 
 typedef struct s_ftsglRenderer
 {
+	t_ftsglVao				vao;
 	t_ftsglWindow			*window;
 	t_ftsglShaderProgram	*program;
 	t_ftsglBufferObject		vertexBuffer;

@@ -15,7 +15,6 @@ typedef struct s_ftsglWindow
 	int			base_height;
 	int			width;
 	int			height;
-	t_ftsglVao	vao;
 	char		*title;
 	GLFWwindow	*win;
 }	t_ftsglWindow;
