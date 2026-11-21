@@ -29,9 +29,9 @@ t_ftsglRenderer	*ftsglRendererCreate(t_ftsglWindow *window)
 			const GLfloat		qx = x / (GLfloat)window->base_width * 2.0f - 1;
 			const GLfloat		qy = y / (GLfloat)window->base_height * 2.0f - 1;
 			const t_ftsglQuad	data = ftsglQuad(
-				ftsglVec2(qx, qy),
-				ftsglVec2(qx + qw, qy + qh),
-				ftsglVec4(0, 0, 0, 1.0f)
+				ftsglVec2f(qx, qy),
+				ftsglVec2f(qx + qw, qy + qh),
+				ftsglVec4f(0, 0, 0, 1.0f)
 			);
 			ftsglBufferObjectDataAdd(&renderer->vertexBuffer, sizeof(data), &data);
 
@@ -68,7 +68,7 @@ t_ftsglRenderer	*ftsglRendererPresent(t_ftsglRenderer *renderer)
 	return (renderer);
 }
 
-t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, GLint y, t_ftsglVec3 col)
+t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, GLint y, t_ftsglVec3f col)
 {
 	if (NULL == renderer)
 		return (NULL);
@@ -81,15 +81,15 @@ t_ftsglRenderer	*ftsglRendererSetPixelColor(t_ftsglRenderer *renderer, GLint x, 
 	const GLfloat		qx = x / (GLfloat)renderer->window->base_width * 2.0f - 1;
 	const GLfloat		qy = ry / (GLfloat)renderer->window->base_height * 2.0f - 1;
 	const t_ftsglQuad	quad = ftsglQuad(
-		ftsglVec2(qx, qy),
-		ftsglVec2(qx + qw, qy + qh),
-		ftsglVec4(col.x, col.y, col.z, 1.0f)
+		ftsglVec2f(qx, qy),
+		ftsglVec2f(qx + qw, qy + qh),
+		ftsglVec4f(col.x, col.y, col.z, 1.0f)
 	);
 	ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (ry * renderer->window->base_width + x) * sizeof(quad), sizeof(quad), &quad);
 	return (renderer);
 }
 
-t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3 col)
+t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3f col)
 {
 	if (NULL == renderer)
 		return (NULL);
@@ -102,9 +102,9 @@ t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3 col)
 			const GLfloat		qx = x / (GLfloat)renderer->window->base_width * 2.0f - 1;
 			const GLfloat		qy = y / (GLfloat)renderer->window->base_height * 2.0f - 1;
 			const t_ftsglQuad	quad = ftsglQuad(
-				ftsglVec2(qx, qy),
-				ftsglVec2(qx + qw, qy + qh),
-				ftsglVec4(col.x, col.y, col.z, 1.0f)
+				ftsglVec2f(qx, qy),
+				ftsglVec2f(qx + qw, qy + qh),
+				ftsglVec4f(col.x, col.y, col.z, 1.0f)
 			);
 			ftsglBufferObjectDataUpdate(&renderer->vertexBuffer, (y * renderer->window->base_width + x) * sizeof(quad), sizeof(quad), &quad);
 		}
