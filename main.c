@@ -9,16 +9,16 @@ int	main(void)
 		return (FTSGL_FAILURE);
 
 	t_ftsglRenderer	*renderer = ftsglRendererCreate(window);
+	if (NULL == renderer)
+	{
+		ftsglWindowDestroy(window);
+		return (FTSGL_FAILURE);
+	}
 	glfwSetWindowUserPointer(window->win, renderer);
 
-	int	x = 0;
 	while(!glfwWindowShouldClose(window->win))
 	{
 		glfwPollEvents();
-		ftsglRendererSetPixelColor(renderer, x % window->base_width, x / window->base_width, (t_ftsglVec3f){1, 0, 0});
-		++x;
-		if (x >= window->base_width * window->base_height)
-			x = 0;
 		ftsglRendererPresent(renderer);
 	}
 	ftsglRendererDestroy(renderer);
