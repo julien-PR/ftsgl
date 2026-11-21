@@ -14,3 +14,18 @@ t_ftsglVec4	ftsglVec4(double x, double y, double z, double w)
 {
 	return ((t_ftsglVec4){x, y, z, w});
 }
+
+t_ftsglVec2f	ftsglVec2f(float x, float y)
+{
+	return ((t_ftsglVec2f){x, y});
+}
+
+t_ftsglVec3f	ftsglVec3f(float x, float y, float z)
+{
+	return ((t_ftsglVec3f){x, y, z});
+}
+
+t_ftsglVec4f	ftsglVec4f(float x, float y, float z, float w)
+{
+	return ((t_ftsglVec4f){x, y, z, w});
+}
