@@ -112,6 +112,21 @@ t_ftsglRenderer	*ftsglRendererClear(t_ftsglRenderer *renderer, t_ftsglVec3f col)
 	return (renderer);
 }
 
+t_ftsglRenderer	*ftsglRendererPutImage(t_ftsglRenderer *renderer, t_ftsglImage *image, int x, int y)
+{
+	if (NULL == renderer  || NULL == image || x < 0 || y < 0 || x >= renderer->window->base_width || y >= renderer->window->base_height)
+		return (NULL);
+	for (GLint py = 0; py < image->height; ++py)
+	{
+		for (GLint px = 0; px < image->width; ++px)
+		{
+			const unsigned char	*pixel = (unsigned char *)(image->pixels + (py * image->width + px) * 3);
+			ftsglRendererSetPixelColor(renderer, x + px, y + py, ftsglVec3f(*pixel, *(pixel+1), *(pixel+2)));
+		}
+	}
+	return (renderer);
+}
+
 void	ftsglRendererDestroy(t_ftsglRenderer *renderer)
 {
 	if (NULL == renderer)
