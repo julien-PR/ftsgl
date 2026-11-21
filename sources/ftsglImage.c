@@ -10,13 +10,13 @@ t_ftsglImage	*ftsglImageCreate(int width, int height, void *pixels)
 		return (NULL);
 	image->width = width;
 	image->height = height;
-	image->pixels = calloc(size * 3, 1);
+	image->pixels = calloc(size * 4, 1);
 	if (NULL == image->pixels)
 	{
 		free(image);
 		return (NULL);
 	}
-	strMemCopy(image->pixels, pixels, size * 3);
+	strMemCopy(image->pixels, pixels, size * 4);
 	return (image);
 }
 
