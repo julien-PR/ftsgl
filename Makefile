@@ -10,7 +10,7 @@ LIBSTRDIR = $(LIBDIR)/libstr
 LIBSTR = $(LIBSTRDIR)/libstr.h
 
 VPATH = sources:sources/callbacks:sources/utils
-SRCS =	main.c ftsglWindow.c ftsglRenderer.c ftsglImage.c ftsglQuad.c ftsglVector.c ftsglShader.c ftsglBufferObject.c ftsglVao.c utils.c
+SRCS =	main.c ftsglWindow.c ftsglRenderer.c ftsglImage.c ftsglColor.c ftsglQuad.c ftsglVector.c ftsglShader.c ftsglBufferObject.c ftsglVao.c utils.c
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
