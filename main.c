@@ -15,7 +15,7 @@ int	main(void)
 	while(!glfwWindowShouldClose(window->win))
 	{
 		glfwPollEvents();
-		ftsglRendererSetPixelColor(renderer, x % window->base_width, x / window->base_width, (t_ftsglVec3){1, 0, 0});
+		ftsglRendererSetPixelColor(renderer, x % window->base_width, x / window->base_width, (t_ftsglVec3f){1, 0, 0});
 		++x;
 		if (x >= window->base_width * window->base_height)
 			x = 0;
