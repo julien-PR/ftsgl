@@ -1,6 +1,6 @@
 #include "ftsglQuad.h"
 
-t_ftsglQuad	ftsglQuad(t_ftsglVec2 p1, t_ftsglVec2 p2, t_ftsglVec4 col)
+t_ftsglQuad	ftsglQuad(t_ftsglVec2f p1, t_ftsglVec2f p2, t_ftsglVec4f col)
 {
 	t_ftsglQuad	quad = {
 		{p1,			col},

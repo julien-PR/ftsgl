@@ -11,6 +11,6 @@ typedef struct s_ftsglQuad
 	t_ftsglVertex	d;
 }	t_ftsglQuad;
 
-t_ftsglQuad	ftsglQuad(t_ftsglVec2 p1, t_ftsglVec2 p2, t_ftsglVec4 col);
+t_ftsglQuad	ftsglQuad(t_ftsglVec2f p1, t_ftsglVec2f p2, t_ftsglVec4f col);
 
 #endif
