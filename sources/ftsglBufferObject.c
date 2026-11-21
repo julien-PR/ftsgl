@@ -1,6 +1,6 @@
 #include "ftsglBufferObject.h"
 
-t_ftsglBufferObject	ftsglBufferObjectGen(GLenum type, GLsizeiptr size)
+t_ftsglBufferObject	ftsglBufferObjectGen(GLenum type, GLsizeiptr size, GLenum usage)
 {
 	t_ftsglBufferObject	buffer;
 
@@ -12,7 +12,7 @@ t_ftsglBufferObject	ftsglBufferObjectGen(GLenum type, GLsizeiptr size)
 		return ((t_ftsglBufferObject){0});
 	glGenBuffers(1, &buffer.addr);
 	glBindBuffer(type, buffer.addr);
-	glBufferData(buffer.type, size, NULL, GL_DYNAMIC_DRAW);
+	glBufferData(buffer.type, size, NULL, usage);
 	return (buffer);
 }
 

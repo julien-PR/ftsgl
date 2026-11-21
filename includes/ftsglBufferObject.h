@@ -17,7 +17,7 @@ typedef struct s_ftsglBufferObject
 	GLsizeiptr	capacity;
 }	t_ftsglBufferObject;
 
-t_ftsglBufferObject	ftsglBufferObjectGen(GLenum type, GLsizeiptr size);
+t_ftsglBufferObject	ftsglBufferObjectGen(GLenum type, GLsizeiptr size, GLenum usage);
 
 t_ftsglBufferObject	*ftsglBufferObjectDataAdd(t_ftsglBufferObject *buffer, GLsizeiptr size, const void *data);
 
