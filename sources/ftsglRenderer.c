@@ -16,8 +16,8 @@ t_ftsglRenderer	*ftsglRendererCreate(t_ftsglWindow *window)
 	renderer->window = window;
 	vertices_size = window->base_width * window->base_height * sizeof(t_ftsglQuad);
 	elements_size = window->base_width * window->base_height * 6 * sizeof(GLuint);
-	renderer->vertexBuffer = ftsglBufferObjectGen(GL_ARRAY_BUFFER, vertices_size);
-	renderer->elementBuffer = ftsglBufferObjectGen(GL_ELEMENT_ARRAY_BUFFER, elements_size);
+	renderer->vertexBuffer = ftsglBufferObjectGen(GL_ARRAY_BUFFER, vertices_size, GL_DYNAMIC_DRAW);
+	renderer->elementBuffer = ftsglBufferObjectGen(GL_ELEMENT_ARRAY_BUFFER, elements_size, GL_STATIC_DRAW);
 
 	const GLfloat	qw = 2.0f / (GLfloat)window->base_width;
 	const GLfloat	qh = 2.0f / (GLfloat)window->base_height;
