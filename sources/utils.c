@@ -1,4 +1,7 @@
-#include "libftsgl.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include "libstr.h"
 
 char	*read_file(const char *path)
 {
