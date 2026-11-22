@@ -1,7 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-INCLUDES = includes
+INCLUDES_DIRECTORIES = includes
+INCLUDES = $(addprefix -I, $(INCLUDES_DIRECTORIES))
 
 LIBS = -lGL -lglfw -lGLEW
 
@@ -19,7 +20,7 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 $(OBJDIR)/%.o : %.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 $(OBJDIR) :
 	mkdir -p $@
