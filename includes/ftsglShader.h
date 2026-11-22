@@ -7,7 +7,7 @@
 # include <GL/glew.h>
 # include "libstr.h"
 # include "libmem.h"
-# include "utils.h"
+# include "libfile.h"
 
 typedef struct s_ftsglShader
 {
