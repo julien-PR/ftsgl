@@ -1,7 +1,19 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-INCLUDES_DIRECTORIES = includes
+LIBS_DIR = libs
+JPR_LIB_DIR = $(LIBS_DIR)/JPR
+
+JPR_LIBMEM_DIR = $(JPR_LIB_DIR)/libmem
+JPR_LIBMEM = $(JPR_LIBMEM_DIR)/libmem.h
+
+JPR_LIBSTR_DIR = $(JPR_LIB_DIR)/libstr
+JPR_LIBSTR = $(JPR_LIBSTR_DIR)/libstr.h
+
+JPR_LIBFILE_DIR = $(JPR_LIB_DIR)/libfile
+JPR_LIBFILE = $(JPR_LIBFILE_DIR)/libfile.h
+
+INCLUDES_DIRECTORIES = includes $(JPR_LIBMEM_DIR) $(JPR_LIBSTR_DIR) $(JPR_LIBFILE_DIR)
 INCLUDES = $(addprefix -I, $(INCLUDES_DIRECTORIES))
 
 LIBS = -lGL -lglfw -lGLEW
@@ -19,8 +31,27 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-$(OBJDIR)/%.o : %.c | $(OBJDIR)
+$(OBJDIR)/%.o : %.c | $(OBJDIR) $(JPR_LIBSTR) $(JPR_LIBMEM) $(JPR_LIBFILE)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(LIBS_DIR) :
+	mkdir -p $@
+
+$(JPR_LIB_DIR) : | $(LIBS_DIR)
+	rm -rf $(JPR_LIB_DIR)
+	git clone https://github.com/julien-PR/JPR.git $@
+
+$(JPR_LIBSTR) :
+	rm -rf $(JPR_LIB_DIR)
+	$(MAKE) $(JPR_LIB_DIR)
+
+$(JPR_LIBMEM) :
+	rm -rf $(JPR_LIB_DIR)
+	$(MAKE) $(JPR_LIB_DIR)
+
+$(JPR_LIBFILE) :
+	rm -rf $(JPR_LIB_DIR)
+	$(MAKE) $(JPR_LIB_DIR)
 
 $(OBJDIR) :
 	mkdir -p $@
