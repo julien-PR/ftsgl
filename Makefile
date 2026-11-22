@@ -7,7 +7,7 @@ INCLUDES = $(addprefix -I, $(INCLUDES_DIRECTORIES))
 LIBS = -lGL -lglfw -lGLEW
 
 VPATH = sources
-SRCS =	main.c ftsglWindow.c ftsglRenderer.c ftsglImage.c ftsglColor.c ftsglQuad.c ftsglVector.c ftsglShader.c ftsglBufferObject.c ftsglVao.c utils.c
+SRCS =	main.c ftsglWindow.c ftsglRenderer.c ftsglImage.c ftsglColor.c ftsglQuad.c ftsglVector.c ftsglShader.c ftsglBufferObject.c ftsglVao.c
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
