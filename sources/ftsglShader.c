@@ -155,7 +155,7 @@ t_ftsglShader	*ftsglShaderReload(t_ftsglShader *shader)
 
 	if (0 == shader->addr)
 		return (NULL);
-	shaderText = fileRead(shader->path);
+	shaderText = fileRead(shader->path, NULL);
 	if (NULL == shaderText)
 		return (NULL);
 	glShaderSource(shader->addr, 1, (const char *const *)&shaderText, NULL);
